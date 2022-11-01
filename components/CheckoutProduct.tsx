@@ -1,14 +1,14 @@
 import {ChevronDownIcon} from "@heroicons/react/outline";
 import Image from "next/image";
 import {urlFor} from "../sanity";
-import Currency from "react-currency-formatter";
+// import Currency from "react-currency-formatter";
 import {removeFromBasket} from "../redux/basketSlice";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { Product as ProductType } from "../typings";
-import { useTranslation } from "next-i18next";
 import en from "../public/locales/en/common.json";
+import currencyFormatter from "../utils/currencyHelper";
 
 interface CheckoutProductProps {
     items : ProductType[];
@@ -27,7 +27,7 @@ function CheckoutProduct({id, items} : CheckoutProductProps) {
     const router = useRouter();
     const {locale} = router;
     
-
+    
     return (
         <div className="flex flex-col gap-x-4 border-b border-gray-300 pb-5 lg:flex-row lg:items-center">
             <div className="relative h-44 w-44">
@@ -49,9 +49,8 @@ function CheckoutProduct({id, items} : CheckoutProductProps) {
                 </div>
                 <div className="flex flex-col items-end space-y-4">
                     <h4 className="text-xl font-semibold lg:text-2xl">
-                        <Currency
-                            quantity={items.reduce((total, item) => total + item.price, 0)}
-                            currency="EUR"/>
+                        
+                            {currencyFormatter(items.reduce((total, item) => total + item.price, 0), locale)}
                     </h4>
                     <button
                         onClick={removeItemFromBasket}
