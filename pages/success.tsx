@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Button from '../components/Button';
-import Currency from "react-currency-formatter";
 import { GetServerSideProps } from 'next';
 import { fetchLineItems } from '../utils/fetchLineItems';
 import { useSession } from "next-auth/react";
@@ -14,6 +13,7 @@ import en from '../locales/en';
 import fr from '../locales/fr';
 import ReactFlagsSelect from "react-flags-select";
 import { StripeProduct } from '../typings';
+import currencyFormatter from '../utils/currencyHelper';
 
 
 interface Props {
@@ -152,7 +152,7 @@ function Success({products}: Props) {
                   )}
                 </button>
                 <p className='text-xl font-medium text-black'>
-                  <Currency  quantity={subtotal + 20} currency="EUR"/>
+                  {currencyFormatter(subtotal + 20, locale)} 
                 </p>
               </div>
             </div>
@@ -171,7 +171,7 @@ function Success({products}: Props) {
                       </div>
                       <p className='flex-1'>{product.description}</p>
                       <p>
-                        <Currency quantity={product.price.unit_amount /100} currency={product.currency}/>
+                        {currencyFormatter(product.price.unit_amount /100, product.currency)}
                       </p>
                     </div>
                   ))}
@@ -180,7 +180,7 @@ function Success({products}: Props) {
                   <div className='flex justify-between text-sm'>
                     <p className='text-[gray]'>{t.subtotal}</p>
                     <p className='font-medium'>
-                      <Currency quantity={subtotal} currency="EUR"/>
+                      {currencyFormatter(subtotal, locale)}
                       </p>
                   </div>
                   <div className='flex justify-between text-sm'>
@@ -190,7 +190,7 @@ function Success({products}: Props) {
                   <div className='flex justify-between text-sm'>
                     <p className='text-[gray]'>{t.shipping}</p>
                     <p className='font-medium'>
-                      <Currency quantity={20} currency="EUR"/>
+                      {currencyFormatter(20, locale)}
                     </p>
                   </div>
                 </div>
@@ -199,7 +199,7 @@ function Success({products}: Props) {
                   <p className='flex items-center gap-x-2 text-xs text-[gray]'>
                     EUR
                     <span className='text-xl font-medium text-black'>
-                      <Currency quantity={subtotal + 20} currency="EUR"/>
+                      {currencyFormatter(subtotal + 20, locale)}
                     </span>
                   </p>
                 </div>

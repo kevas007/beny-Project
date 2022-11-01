@@ -6,16 +6,15 @@ import Button from "../components/Button";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import CheckoutProduct from "../components/CheckoutProduct";
-import Currency from "react-currency-formatter";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import Stripe from "stripe";
 import { fetchPostJSON } from "../utils/api-helpers";
 import getStripe from "../utils/get-stripejs";
-import Link from 'next/link'
 import en from '../locales/en';
 import fr from '../locales/fr';
 import Footer from '../components/Footer';
 import {Product as ProductType} from '../typings';
+import CurrencyFormatter from '../utils/currencyHelper';
 
 function checkout() {
     const items = useSelector(selectBasketItems);
@@ -84,7 +83,7 @@ function checkout() {
                             <div className="flex justify-between">
                                 <p>{t.subtotal}</p>
                                 <p>
-                                    <Currency quantity={basketTotal} currency="EUR"/>
+                                    {}
                                 </p>
                             </div>
                             <div className="flex justify-between">
@@ -105,7 +104,7 @@ function checkout() {
                         <div className="flex justify-between pt-4 text-xl font-semibold">
                             <h4>{t.total}</h4>
                             <h4>
-                                <Currency quantity={basketTotal} currency="EUR"/>
+                                {CurrencyFormatter(basketTotal, locale)}
                             </h4>
                         </div>
                     </div>
@@ -131,7 +130,7 @@ function checkout() {
                                 <h4 className="mb-4 contents flex-col text-xl font-semibold">
                                     {t.full}
                                     <span>
-                                        <Currency quantity={basketTotal} currency="EUR"/>
+                                        {CurrencyFormatter(basketTotal, locale)}
                                     </span>
                                 </h4>
                                 <Button 
