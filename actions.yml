@@ -1,0 +1,25 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run : mv terraform-reactjs/* /var/www/html/
+    - run: npm --prefix /var/www/html/ install
+    - run:  npm  run --prefix /var/www/html/ build
+    - run:  mv /var/www/html/build/* /var/www/html/
