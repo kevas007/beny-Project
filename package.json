@@ -3,9 +3,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "check-types": "tsc --noEmit",
-    "export": "npm run build && next export -o _static"
+    "prod": "next start",
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.3",
@@ -20,8 +19,8 @@
     "next-i18next": "^12.1.0",
     "next-sanity": "^1.0.0",
     "next-themes": "^0.2.1",
-    "react": "18.0.0",
-    "react-dom": "18.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-flags-select": "^2.2.3",
     "react-hot-toast": "^2.4.0",
     "react-redux": "^8.0.4",

@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    container_name: nuxt-app
+    restart: always
+    ports:
+      - "8000:3000"
+    command: 'yarn run dev'
+  # nginx:
+  #   build: ./nginx
+  #   ports:
+  #     - '80:80'
+  #   depends_on:
+  #     - app

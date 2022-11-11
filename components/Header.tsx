@@ -38,7 +38,7 @@ const [selectedFlag, setSelectedFlag] = useState((locale === "en") ? "US" : loca
                         <Image 
                         src="https://rb.gy/vsvv2o" 
                         layout="fill" 
-                        objectFit="contain"/>
+                        objectFit="contain" alt='logo'/>
                     </div>
                 </Link>
             </div>
@@ -66,7 +66,7 @@ const [selectedFlag, setSelectedFlag] = useState((locale === "en") ? "US" : loca
                     src = {
                         session.user?.image ||
                         "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"}
-                    alt=''
+                    alt='logo'
                     className='cursor-pointer rounded-full'
                     width={34}
                     height={34}
